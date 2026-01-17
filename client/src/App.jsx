@@ -1,7 +1,19 @@
-import React from "react";
+import React, { useRef } from "react";
+
 import Navbar from "./assets/components/Navbar.jsx";
 
 function App() {
+
+    const sliderRef = useRef(null);
+
+    const scroll = (dir) => {
+    if (!sliderRef.current) return;
+    sliderRef.current.scrollBy({
+        left: dir === "left" ? -300 : 300,
+        behavior: "smooth",
+    });
+    };
+
     return (
         <div>
             {/* parent wrapper 01 */}
@@ -42,20 +54,111 @@ function App() {
                         </div>
                         {/* bottom */}
                         <div className="flex flex-1 flex-col justify-center items-center border-4 border-purple-500">
-                            <div className=" w-[75vw] ">
-                                <div className="text-[0.6rem] mb-1.5 font-light">
-                                    Trending Internships/Jobs
+                            <div className="w-[75vw] mx-auto">
+                                <div className="text-[1.1rem] mb-1.5 font-semibold text-gray-200">
+                                    Trending internships/jobs
                                 </div>
-                            </div>
-                            <div className="flex items-center justify-center gap-2 w-[75vw] h-[12vw] rounded bg-white/8 border border-white/2">
-                                <div className="flex justify-center items-center w-[20vw] h-[9vw] rounded text-black text-[0.6rem] font-bold bg-white border border-white/2">
-                                    DevOps Engineer
-                                </div>
-                                <div className="flex justify-center items-center w-[20vw] h-[9vw] rounded text-black text-[0.6rem] font-bold bg-white border border-white/2">
-                                    DevOps Engineer
-                                </div>
-                                <div className="flex justify-center items-center w-[20vw] h-[9vw] rounded text-black text-[0.6rem] font-bold bg-white border border-white/2">
-                                    DevOps Engineer
+
+                                <div className="relative w-full">
+                                    
+                                    {/* Left Arrow (Positioned Outside) */}
+                                    <button
+                                        onClick={() => scroll("left")}
+                                        className="absolute -left-12 top-1/2 -translate-y-1/2 z-20
+                                                flex items-center justify-center
+                                                w-8 h-8 rounded-full
+                                                text-white/80 hover:text-white
+                                                bg-white/5 hover:bg-white/10
+                                                border border-white/10
+                                                backdrop-blur-sm transition-all"
+                                    >
+                                        ❮
+                                    </button>
+
+                                    {/* Scroll Area (Reduced padding since arrows are outside) */}
+                                    <div
+                                        ref={sliderRef}
+                                        className="flex items-center gap-4
+                                                w-full h-[12vw] min-h-[90px] max-h-[120px]
+                                                px-4 
+                                                rounded-2xl
+                                                bg-gradient-to-r from-white/5 via-white/3 to-white/5
+                                                border border-white/10
+                                                shadow-[0_20px_40px_rgba(0,0,0,0.45)]
+                                                overflow-x-auto scroll-smooth no-scrollbar"
+                                    >
+                                        {/* CARD 1: DevOps */}
+                                        <div className="flex items-center gap-3
+                                                        min-w-[20vw] max-w-[240px]
+                                                        h-[9vw] min-h-[70px] max-h-[90px]
+                                                        px-4 bg-white rounded-xl
+                                                        shadow-sm border border-gray-100
+                                                        text-sm text-gray-900 font-bold shrink-0">
+                                            <div className="flex items-center justify-center w-9 h-9 rounded-full bg-violet-50">
+                                                <span className="text-xl text-violet-600 mb-1">∞</span>
+                                            </div>
+                                            <span className="text-gray-800 font-semibold text-sm">DevOps Engineer</span>
+                                        </div>
+
+                                        {/* CARD 2: Data Analyst */}
+                                        <div className="flex items-center gap-3
+                                                        min-w-[20vw] max-w-[240px]
+                                                        h-[9vw] min-h-[70px] max-h-[90px]
+                                                        px-4 bg-white rounded-xl
+                                                        shadow-sm border border-gray-100
+                                                        text-sm text-gray-900 font-bold shrink-0">
+                                            <div className="flex items-center justify-center w-9 h-9 rounded-full bg-sky-50">
+                                                <div className="flex items-end gap-[2px]">
+                                                    <div className="w-1.5 h-2 bg-sky-400 rounded-t-[1px]"></div>
+                                                    <div className="w-1.5 h-3 bg-sky-500 rounded-t-[1px]"></div>
+                                                    <div className="w-1.5 h-4 bg-sky-600 rounded-t-[1px]"></div>
+                                                </div>
+                                            </div>
+                                            <span className="text-gray-800 font-semibold text-sm">Data Analyst</span>
+                                        </div>
+
+                                        {/* CARD 3: Machine Learning */}
+                                        <div className="flex items-center gap-3
+                                                        min-w-[20vw] max-w-[240px]
+                                                        h-[9vw] min-h-[70px] max-h-[90px]
+                                                        px-4 bg-white rounded-xl
+                                                        shadow-sm border border-gray-100
+                                                        text-sm text-gray-900 font-bold shrink-0">
+                                            <div className="flex items-center justify-center w-9 h-9 rounded-full bg-indigo-50">
+                                                <div className="w-5 h-5 border-2 border-indigo-500 rounded flex items-center justify-center">
+                                                    <div className="w-2 h-2 bg-indigo-500 rounded-full"></div>
+                                                </div>
+                                            </div>
+                                            <span className="text-gray-800 font-semibold text-sm">Machine Learning</span>
+                                        </div>
+
+                                        {/* CARD 4: UI/UX (Extra card to test scrolling) */}
+                                        <div className="flex items-center gap-3
+                                                        min-w-[20vw] max-w-[240px]
+                                                        h-[9vw] min-h-[70px] max-h-[90px]
+                                                        px-4 bg-white rounded-xl
+                                                        shadow-sm border border-gray-100
+                                                        text-sm text-gray-900 font-bold shrink-0">
+                                            <div className="flex items-center justify-center w-9 h-9 rounded-full bg-pink-50">
+                                                <span className="text-pink-500 font-serif italic text-lg">Ux</span>
+                                            </div>
+                                            <span className="text-gray-800 font-semibold text-sm">UI/UX Designer</span>
+                                        </div>
+                                    </div>
+
+                                    {/* Right Arrow (Positioned Outside) */}
+                                    <button
+                                        onClick={() => scroll("right")}
+                                        className="absolute -right-12 top-1/2 -translate-y-1/2 z-20
+                                                flex items-center justify-center
+                                                w-8 h-8 rounded-full
+                                                text-white/80 hover:text-white
+                                                bg-white/5 hover:bg-white/10
+                                                border border-white/10
+                                                backdrop-blur-sm transition-all"
+                                    >
+                                        ❯
+                                    </button>
                                 </div>
                             </div>
                         </div>
