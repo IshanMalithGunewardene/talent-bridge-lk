@@ -1,17 +1,17 @@
-import React, { useRef } from "react";
+import React, { useRef } from 'react';
 
-import Navbar from "./assets/components/Navbar.jsx";
+import Navbar from './assets/components/Navbar.jsx';
+import Footer from './assets/components/Footer.jsx';
 
 function App() {
-
     const sliderRef = useRef(null);
 
     const scroll = (dir) => {
-    if (!sliderRef.current) return;
-    sliderRef.current.scrollBy({
-        left: dir === "left" ? -300 : 300,
-        behavior: "smooth",
-    });
+        if (!sliderRef.current) return;
+        sliderRef.current.scrollBy({
+            left: dir === 'left' ? -300 : 300,
+            behavior: 'smooth',
+        });
     };
 
     return (
@@ -42,12 +42,12 @@ function App() {
                                 </p>
                                 <div className="flex justify-center items-center bg-white/10 backdrop-blur-md rounded-full p-1 border border-gray-500/30 w-full max-w-md">
                                     <input
-                                    type="text"
-                                    className="flex-grow bg-transparent text-white placeholder:text-gray-300 text-sm md:text-base pl-4 py-2 rounded-full focus:outline-none"
-                                    placeholder="Find any job or intern you want"
+                                        type="text"
+                                        className="flex-grow bg-transparent text-white placeholder:text-gray-300 text-sm md:text-base pl-4 py-2 rounded-full focus:outline-none"
+                                        placeholder="Find any job or intern you want"
                                     />
                                     <button className="bg-white text-black rounded-full px-6 py-2 font-medium text-sm hover:bg-gray-100 shadow-md transition-all duration-300">
-                                    Search
+                                        Search
                                     </button>
                                 </div>
                             </div>
@@ -60,10 +60,9 @@ function App() {
                                 </div>
 
                                 <div className="relative w-full">
-                                    
                                     {/* Left Arrow (Positioned Outside) */}
                                     <button
-                                        onClick={() => scroll("left")}
+                                        onClick={() => scroll('left')}
                                         className="absolute -left-12 top-1/2 -translate-y-1/2 z-20
                                                 flex items-center justify-center
                                                 w-8 h-8 rounded-full
@@ -88,25 +87,33 @@ function App() {
                                                 overflow-x-auto scroll-smooth no-scrollbar"
                                     >
                                         {/* CARD 1: DevOps */}
-                                        <div className="flex items-center gap-3
+                                        <div
+                                            className="flex items-center gap-3
                                                         min-w-[20vw] max-w-[240px]
                                                         h-[9vw] min-h-[70px] max-h-[90px]
                                                         px-4 bg-white rounded-xl
                                                         shadow-sm border border-gray-100
-                                                        text-sm text-gray-900 font-bold shrink-0">
+                                                        text-sm text-gray-900 font-bold shrink-0"
+                                        >
                                             <div className="flex items-center justify-center w-9 h-9 rounded-full bg-violet-50">
-                                                <span className="text-xl text-violet-600 mb-1">∞</span>
+                                                <span className="text-xl text-violet-600 mb-1">
+                                                    ∞
+                                                </span>
                                             </div>
-                                            <span className="text-gray-800 font-semibold text-sm">DevOps Engineer</span>
+                                            <span className="text-gray-800 font-semibold text-sm">
+                                                DevOps Engineer
+                                            </span>
                                         </div>
 
                                         {/* CARD 2: Data Analyst */}
-                                        <div className="flex items-center gap-3
+                                        <div
+                                            className="flex items-center gap-3
                                                         min-w-[20vw] max-w-[240px]
                                                         h-[9vw] min-h-[70px] max-h-[90px]
                                                         px-4 bg-white rounded-xl
                                                         shadow-sm border border-gray-100
-                                                        text-sm text-gray-900 font-bold shrink-0">
+                                                        text-sm text-gray-900 font-bold shrink-0"
+                                        >
                                             <div className="flex items-center justify-center w-9 h-9 rounded-full bg-sky-50">
                                                 <div className="flex items-end gap-[2px]">
                                                     <div className="w-1.5 h-2 bg-sky-400 rounded-t-[1px]"></div>
@@ -114,41 +121,53 @@ function App() {
                                                     <div className="w-1.5 h-4 bg-sky-600 rounded-t-[1px]"></div>
                                                 </div>
                                             </div>
-                                            <span className="text-gray-800 font-semibold text-sm">Data Analyst</span>
+                                            <span className="text-gray-800 font-semibold text-sm">
+                                                Data Analyst
+                                            </span>
                                         </div>
 
                                         {/* CARD 3: Machine Learning */}
-                                        <div className="flex items-center gap-3
+                                        <div
+                                            className="flex items-center gap-3
                                                         min-w-[20vw] max-w-[240px]
                                                         h-[9vw] min-h-[70px] max-h-[90px]
                                                         px-4 bg-white rounded-xl
                                                         shadow-sm border border-gray-100
-                                                        text-sm text-gray-900 font-bold shrink-0">
+                                                        text-sm text-gray-900 font-bold shrink-0"
+                                        >
                                             <div className="flex items-center justify-center w-9 h-9 rounded-full bg-indigo-50">
                                                 <div className="w-5 h-5 border-2 border-indigo-500 rounded flex items-center justify-center">
                                                     <div className="w-2 h-2 bg-indigo-500 rounded-full"></div>
                                                 </div>
                                             </div>
-                                            <span className="text-gray-800 font-semibold text-sm">Machine Learning</span>
+                                            <span className="text-gray-800 font-semibold text-sm">
+                                                Machine Learning
+                                            </span>
                                         </div>
 
                                         {/* CARD 4: UI/UX (Extra card to test scrolling) */}
-                                        <div className="flex items-center gap-3
+                                        <div
+                                            className="flex items-center gap-3
                                                         min-w-[20vw] max-w-[240px]
                                                         h-[9vw] min-h-[70px] max-h-[90px]
                                                         px-4 bg-white rounded-xl
                                                         shadow-sm border border-gray-100
-                                                        text-sm text-gray-900 font-bold shrink-0">
+                                                        text-sm text-gray-900 font-bold shrink-0"
+                                        >
                                             <div className="flex items-center justify-center w-9 h-9 rounded-full bg-pink-50">
-                                                <span className="text-pink-500 font-serif italic text-lg">Ux</span>
+                                                <span className="text-pink-500 font-serif italic text-lg">
+                                                    Ux
+                                                </span>
                                             </div>
-                                            <span className="text-gray-800 font-semibold text-sm">UI/UX Designer</span>
+                                            <span className="text-gray-800 font-semibold text-sm">
+                                                UI/UX Designer
+                                            </span>
                                         </div>
                                     </div>
 
                                     {/* Right Arrow (Positioned Outside) */}
                                     <button
-                                        onClick={() => scroll("right")}
+                                        onClick={() => scroll('right')}
                                         className="absolute -right-12 top-1/2 -translate-y-1/2 z-20
                                                 flex items-center justify-center
                                                 w-8 h-8 rounded-full
@@ -165,6 +184,7 @@ function App() {
                     </div>
                 </div>
             </div>
+            <Footer />
         </div>
     );
 }
