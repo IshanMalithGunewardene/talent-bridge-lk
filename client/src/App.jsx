@@ -2,6 +2,7 @@ import Navbar from './assets/components/Navbar.jsx';
 import Footer from './assets/components/Footer.jsx';
 import Hero from './features/home/Hero.jsx';
 import Feedback from './features/home/feedBack.jsx';
+import HelpFaqSection from './features/home/faq.jsx';
 function App() {
     return (
         <div>
@@ -19,10 +20,10 @@ function App() {
                         <Navbar />
                     </nav>
                     <Hero />
-                    
                 </div>
             </div>
-            <Feedback/>
+            <Feedback />
+            <HelpFaqSection />
             <Footer />
         </div>
     );
