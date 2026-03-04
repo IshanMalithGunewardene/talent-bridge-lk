@@ -1,38 +1,37 @@
 import React from "react";
 
 function Feedback() {
-    const testimonials = [
+const testimonials = [
   {
-    name: "Angel Kusuma",
+    name: "Nimal Perera",
     review:
-      "This website is a game-changer for students and freshers looking for internships. The curated internship listings save time, and the clear roadmaps make skill-building straightforward. Highly recommended for anyone serious about career growth!",
+      "Talent Bridge LK helped me secure my first internship within two months. The roadmap guidance and curated listings saved me hours of searching. It’s perfect for Sri Lankan undergraduates looking to kickstart their careers.",
     rating: 5,
   },
   {
-    name: "Angel Kusuma",
+    name: "Sithumi Fernando",
     review:
-      "This website is a game-changer for students and freshers looking for internships. The curated internship listings save time, and the clear roadmaps make skill-building straightforward. Highly recommended for anyone serious about career growth!",
+      "I love how structured and beginner-friendly this platform is. The career paths are clearly explained, and the internship updates are very relevant. Highly useful for IT students!",
     rating: 5,
   },
   {
-    name: "Angel Kusuma",
+    name: "Kasun Wijesinghe",
     review:
-      "This website is a game-changer for students and freshers looking for internships. The curated internship listings save time, and the clear roadmaps make skill-building straightforward. Highly recommended for anyone serious about career growth!",
+      "Before using Talent Bridge LK, I was confused about what skills to learn. The step-by-step roadmap made everything clear. Now I feel confident about my career direction.",
+    rating: 4,
+  },
+  {
+    name: "Tharushi Silva",
+    review:
+      "The internship alerts are timely and trustworthy. I applied through this platform and got shortlisted quickly. It’s very helpful for freshers with no prior experience.",
     rating: 5,
   },
   {
-    name: "Angel Kusuma",
+    name: "Ravindu Jayasinghe",
     review:
-      "The platform makes internship hunting easy and structured. Highly recommended for career-focused students.",
+      "Simple design, clear guidance, and practical opportunities. This website truly bridges the gap between students and companies in Sri Lanka.",
     rating: 5,
   },
-  {
-    name: "Angel Kusuma",
-    review:
-      "Clear roadmaps and curated opportunities save so much time. A must-use website for freshers.",
-    rating: 5,
-  },
-
 ];
   return (
     <section className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-r from-gray-900 via-purple-900 to-blue-900 px-6">
