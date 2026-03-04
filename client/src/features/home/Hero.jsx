@@ -12,14 +12,14 @@ const Hero = () => {
         });
     };
     return (
-        <div className="flex flex-col h-full border-3 border-orange-500">
+        <div className="flex flex-col h-full ">
             {/* top */}
-            <div className="flex-3  border-4 border-green-500">
+            <div className="flex-3  ">
                 <div className="flex flex-col justify-center items-center h-full">
-                    <h1 className="text-3xl md:text-4xl font-semibold mb-2">
+                    <h1 className="text-5xl md:text-5xl font-semibold mb-2">
                         Meet Talentbridge LK
                     </h1>
-                    <p className="text-sm md:text-base text-gray-300 mb-6">
+                    <p className="text-3xl md:text-base text-gray-300 mb-6">
                         Search for better intern or job and learn to be qualified
                     </p>
                     <div className="flex justify-center items-center bg-white/10 backdrop-blur-md rounded-full p-1 border border-gray-500/30 w-full max-w-md">
@@ -32,15 +32,17 @@ const Hero = () => {
                             Search
                         </button>
                     </div>
+                    <div className="mt-1 text-sm w-full  flex justify-center -ml-69 text-gray-300">
+                        Ex: React Internships
+                    </div>
                 </div>
             </div>
+            <div className="text-[1.3rem] mb-1 font-semibold text-gray-200">
+                Trending internships/jobs
+            </div>
             {/* bottom */}
-            <div className="flex flex-1 flex-col justify-center items-center border-4 border-purple-500">
+            <div className="flex mt-1.5 flex-1 flex-col justify-center items-center rounded-xl mb-15 border-1 bg-white/20 backdrop-blur-md">
                 <div className="w-[75vw] mx-auto">
-                    <div className="text-[1.1rem] mb-1.5 font-semibold text-gray-200">
-                        Trending internships/jobs
-                    </div>
-
                     <div className="relative w-full">
                         {/* Left Arrow (Positioned Outside) */}
                         <button
@@ -63,9 +65,6 @@ const Hero = () => {
                                                 w-full h-[12vw] min-h-[90px] max-h-[120px]
                                                 px-4 
                                                 rounded-2xl
-                                                bg-gradient-to-r from-white/5 via-white/3 to-white/5
-                                                border border-white/10
-                                                shadow-[0_20px_40px_rgba(0,0,0,0.45)]
                                                 overflow-x-auto scroll-smooth no-scrollbar"
                         >
                             {/* CARD 1: DevOps */}
