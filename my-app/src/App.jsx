@@ -21,6 +21,8 @@ function App() {
         return () => subscription.unsubscribe()
     }, [])
 
+    console.log(session?.user);
+
     if (!session) {
         return (
             <div className="flex justify-center items-center h-screen bg-gray-100">
@@ -46,6 +48,8 @@ function App() {
     } else {
         return <div>Logged in!</div>;
     }
+
+
 }
 
 export default App
