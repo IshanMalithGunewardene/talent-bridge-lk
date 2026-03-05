@@ -3,7 +3,7 @@ import React from 'react';
 function Footer() {
     return (
         //Main wrapper
-        <footer className="w-full mt-20 bg-gradient-to-br from-slate-950 via-slate-900 to-indigo-950 text-slate-200 bottom-0 flex-grow ">
+        <footer className="w-full  bg-gradient-to-br from-slate-950 via-slate-900 to-indigo-950 text-slate-200 bottom-0 flex-grow ">
             {/*content wrapper*/}
             <div className="mx-auto max-w-6xl px-6 py-14">
                 {/*top section*/}

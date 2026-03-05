@@ -3,10 +3,10 @@ import Footer from './assets/components/Footer.jsx';
 import Hero from './features/home/Hero.jsx';
 import Feedback from './features/home/feedBack.jsx';
 import HelpFaqSection from './features/home/faq.jsx';
-import RolesGrid from './features/home/RolesGrid.jsx';
+import Catogories from './features/home/catogories.jsx';
 function App() {
     return (
-        <div>
+        <div className="p-0">
             {/* parent wrapper 01 */}
             <div className="h-screen w-screen pt-5">
                 {/* background blobs */}
@@ -26,7 +26,7 @@ function App() {
                     <Hero />
                 </div>
             </div>
-            <RolesGrid />
+            <Catogories />
             <Feedback />
             <HelpFaqSection />
             <Footer />
