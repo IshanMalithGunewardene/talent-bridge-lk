@@ -1,18 +1,34 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 
-*:not([class*="text-"]) {
+*:not([class*='text-']) {
     color: white;
 }
 
 body {
-        background:#041A1C;
-
+    background: #041a1c;
 }
 
 .no-scrollbar::-webkit-scrollbar {
-  display: none;
+    display: none;
 }
 .no-scrollbar {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+@keyframes scroll {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-50%);
+    }
+}
+
+.animate-scroll {
+    animation: scroll 80s linear infinite;
+}
+
+.animate-scroll:hover {
+    animation-play-state: paused;
 }

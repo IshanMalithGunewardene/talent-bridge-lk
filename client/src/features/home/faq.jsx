@@ -1,12 +1,5 @@
 import React from 'react';
-
-const faqs = [
-    'What is purpose of Talentbridge LK ?',
-    'What is purpose of Talentbridge LK ?',
-    'What is purpose of Talentbridge LK ?',
-    'What is purpose of Talentbridge LK ?',
-];
-
+import { faqs } from '../../assets/assests';
 const ArrowCircle = () => (
     <span className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-white/20 bg-white/5 text-white/90 transition hover:bg-white/10">
         <svg
