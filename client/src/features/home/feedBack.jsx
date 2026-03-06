@@ -46,6 +46,16 @@ function Feedback() {
                     ))}
                 </div>
             </div>
+            <button
+                className="px-10 py-4 mt-10 text-white font-medium rounded-lg 
+                border border-cyan-400 
+                bg-gradient-to-r from-slate-800 to-blue-900 
+            shadow-[0_0_10px_rgba(34,211,238,0.6)] 
+            hover:scale-120 
+            transition duration-300"
+            >
+                Add FeedBack
+            </button>
         </section>
     );
 }
