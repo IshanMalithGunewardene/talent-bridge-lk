@@ -16,7 +16,7 @@ const Hero = () => {
             {/* top */}
             <div className="flex-3  ">
                 <div className="flex flex-col justify-center items-center h-full">
-                    <h1 className="text-5xl md:text-5xl font-semibold mb-2">
+                    <h1 className="text-5xl md:text-5xl font-semibold mb-2 mt-40">
                         Meet Talentbridge LK
                     </h1>
                     <p className="text-3xl md:text-base text-gray-300 mb-6">
@@ -37,7 +37,7 @@ const Hero = () => {
                     </div>
                 </div>
             </div>
-            <div className="text-[1.3rem] mb-1 font-semibold text-gray-200">
+            <div className="text-[1.3rem] mb-1 font-semibold text-gray-200" mt-30>
                 Trending internships/jobs
             </div>
             {/* bottom */}
