@@ -1,8 +1,10 @@
 import React from 'react';
 import { testimonials } from '../../assets/assests';
+
 function Feedback() {
     return (
         <section className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-r from-gray-900 via-purple-900 to-blue-900 px-6">
+            
             <h1 className="text-3xl md:text-4xl font-bold text-white mt-2 mb-4">
                 Feed Backs on Talent Bridge LK
             </h1>
@@ -12,15 +14,18 @@ function Feedback() {
             </p>
 
             <div className="w-full py-16 bg-gradient-to-br from-teal-900 via-blue-900 to-purple-900 overflow-hidden">
+                
                 {/* Scrolling Container */}
                 <div className="flex w-max animate-scroll gap-8 px-8">
+
                     {[...testimonials, ...testimonials].map((item, index) => (
                         <div
                             key={index}
                             className="min-w-[350px] max-w-[350px] p-8 rounded-2xl 
-              backdrop-blur-lg bg-white/10 border border-white/20 
-              text-white shadow-lg"
+                            backdrop-blur-lg bg-white/10 border border-white/20 
+                            text-white shadow-lg"
                         >
+
                             {/* Profile Image */}
                             <img
                                 src={item.image}
@@ -29,33 +34,44 @@ function Feedback() {
                             />
 
                             {/* Name */}
-                            <h3 className="text-lg font-semibold text-center mb-4">{item.name}</h3>
+                            <h3 className="text-lg font-semibold text-center mb-4">
+                                {item.name}
+                            </h3>
 
                             {/* Review */}
                             <p className="text-sm leading-relaxed text-center mb-6">
                                 {item.review}
                             </p>
 
-                            {/* Stars */}
-                            <div className="flex justify-center gap-1 text-yellow-400 text-xl">
+                            {/* ⭐ Gold Stars */}
+                            <div className="flex justify-center gap-1 text-xl">
                                 {[...Array(item.rating)].map((_, i) => (
-                                    <span key={i}>★</span>
+                                    <span
+                                        key={i}
+                                        className="text-[#FFD700] drop-shadow-md"
+                                    >
+                                        ★
+                                    </span>
                                 ))}
                             </div>
+
                         </div>
                     ))}
                 </div>
             </div>
+
+            {/* Button */}
             <button
                 className="px-10 py-4 mt-10 text-white font-medium rounded-lg 
                 border border-cyan-400 
                 bg-gradient-to-r from-slate-800 to-blue-900 
-            shadow-[0_0_10px_rgba(34,211,238,0.6)] 
-            hover:scale-120 
-            transition duration-300"
+                shadow-[0_0_10px_rgba(34,211,238,0.6)] 
+                hover:scale-110 
+                transition duration-300"
             >
                 Add FeedBack
             </button>
+
         </section>
     );
 }
