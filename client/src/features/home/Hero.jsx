@@ -37,7 +37,7 @@ const Hero = () => {
                     </div>
                 </div>
             </div>
-            <div className="text-[1.3rem] mb-1 font-semibold text-gray-200" mt-30>
+            <div className="text-[1.3rem] mb-1 font-semibold text-gray-200 mt-30">
                 Trending internships/jobs
             </div>
             {/* bottom */}
