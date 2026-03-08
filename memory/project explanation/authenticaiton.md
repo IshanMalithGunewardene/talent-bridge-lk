@@ -1,0 +1,1 @@
+navbar's sign in need to connect with authPage.jsx which connect with supabase authentication .there for user will see authentication of authPage.jsx
