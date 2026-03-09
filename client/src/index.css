@@ -1,12 +1,8 @@
 @import "tailwindcss";
 
-*:not([class*="text-"]) {
-    color: white;
-}
-
 body {
-        background:#041A1C;
-
+    background: #041A1C;
+    color: white;
 }
 
 .no-scrollbar::-webkit-scrollbar {

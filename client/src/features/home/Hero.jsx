@@ -1,5 +1,16 @@
-import React from 'react';
-import { useRef } from 'react';
+import React, { useRef } from 'react';
+import devopsIcon from './assets/devops-icon.svg';
+import dataAnalystIcon from './assets/data-analyst-icon.svg';
+import mlIcon from './assets/ml-icon.svg';
+
+const trendingCards = [
+    { label: 'DevOps Engineer', icon: devopsIcon },
+    { label: 'Data Analyst', icon: dataAnalystIcon },
+    { label: 'Machine Learning', icon: mlIcon },
+    { label: 'DevOps Engineer', icon: devopsIcon },
+    { label: 'Data Analyst', icon: dataAnalystIcon },
+    { label: 'Machine Learning', icon: mlIcon },
+];
 
 const Hero = () => {
     const sliderRef = useRef(null);
@@ -7,158 +18,105 @@ const Hero = () => {
     const scroll = (dir) => {
         if (!sliderRef.current) return;
         sliderRef.current.scrollBy({
-            left: dir === 'left' ? -300 : 300,
+            left: dir === 'left' ? -280 : 280,
             behavior: 'smooth',
         });
     };
+
     return (
-        <div className="flex flex-col h-full border-3 border-orange-500">
-            {/* top */}
-            <div className="flex-3  border-4 border-green-500">
-                <div className="flex flex-col justify-center items-center h-full">
-                    <h1 className="text-3xl md:text-4xl font-semibold mb-2">
-                        Meet Talentbridge LK
-                    </h1>
-                    <p className="text-sm md:text-base text-gray-300 mb-6">
-                        Search for better intern or job and learn to be qualified
-                    </p>
-                    <div className="flex justify-center items-center bg-white/10 backdrop-blur-md rounded-full p-1 border border-gray-500/30 w-full max-w-md">
-                        <input
-                            type="text"
-                            className="flex-grow bg-transparent text-white placeholder:text-gray-300 text-sm md:text-base pl-4 py-2 rounded-full focus:outline-none"
-                            placeholder="Find any job or intern you want"
-                        />
-                        <button className="bg-white text-black rounded-full px-6 py-2 font-medium text-sm hover:bg-gray-100 shadow-md transition-all duration-300">
-                            Search
-                        </button>
-                    </div>
+        <div className="flex flex-col h-full justify-center">
+            {/* ── Hero text + search ── */}
+            <div className="flex flex-col items-center text-center gap-4 flex-1 justify-center">
+                <h1 className="text-5xl font-bold leading-tight tracking-tight">
+                    Meet Talentbridge LK
+                </h1>
+                <p className="text-[1rem] text-white/60">
+                    Search for better intern or job and learn to qualified
+                </p>
+
+                {/* Search bar */}
+                <div className="flex items-center w-full max-w-130 bg-white/10 backdrop-blur-md rounded-full border border-white/20 px-1 py-1 mt-2">
+                    <input
+                        type="text"
+                        className="flex-1 bg-transparent text-white placeholder:text-white/40 text-sm pl-5 pr-3 py-2 focus:outline-none"
+                        placeholder="find any job or intern you want"
+                    />
+                    <button className="flex items-center gap-2 bg-white text-black rounded-full px-6 py-2 font-semibold text-sm hover:bg-gray-100 transition-all duration-200 shadow-sm shrink-0">
+                        {/* magnifier icon */}
+                        <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2.2" viewBox="0 0 24 24">
+                            <circle cx="11" cy="11" r="7" />
+                            <path d="M21 21l-4.35-4.35" strokeLinecap="round" />
+                        </svg>
+                        Search
+                    </button>
                 </div>
+
+                {/* hint */}
+                <p className="text-xs text-white/40 self-start ml-[calc(50%-260px)]">
+                    Ex : React Internships
+                </p>
             </div>
-            {/* bottom */}
-            <div className="flex flex-1 flex-col justify-center items-center border-4 border-purple-500">
-                <div className="w-[75vw] mx-auto">
-                    <div className="text-[1.1rem] mb-1.5 font-semibold text-gray-200">
-                        Trending internships/jobs
+
+            {/* ── Trending section ── */}
+            <div className="pb-10">
+                <p className="text-[1.05rem] font-semibold text-white/80 mb-3">
+                    Trending internships/jobs
+                </p>
+
+                {/* Slider wrapper */}
+                <div className="relative flex items-center">
+                    {/* Left arrow */}
+                    <button
+                        onClick={() => scroll('left')}
+                        aria-label="Scroll left"
+                        className="absolute -left-10 z-20 flex items-center justify-center w-8 h-8 rounded-full
+                                   bg-white/5 hover:bg-white/15 border border-white/15
+                                   text-white/70 hover:text-white transition-all shrink-0"
+                    >
+                        <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
+                            <path d="M15 18l-6-6 6-6" strokeLinecap="round" strokeLinejoin="round" />
+                        </svg>
+                    </button>
+
+                    {/* Track */}
+                    <div
+                        ref={sliderRef}
+                        className="flex items-center gap-4 w-full h-25
+                                   px-4 rounded-2xl
+                                   bg-white/10 backdrop-blur-md border border-white/10
+                                   overflow-x-auto scroll-smooth no-scrollbar"
+                    >
+                        {trendingCards.map((card, idx) => (
+                            <div
+                                key={idx}
+                                className="flex items-center gap-3
+                                           min-w-50 max-w-57.5 h-17
+                                           px-4 bg-white rounded-xl
+                                           shadow-sm border border-gray-100
+                                           cursor-pointer hover:shadow-md transition-shadow shrink-0"
+                            >
+                                <div className="w-10 h-10 flex items-center justify-center rounded-lg bg-gray-50 shrink-0">
+                                    <img src={card.icon} alt={card.label} className="w-7 h-7 object-contain" />
+                                </div>
+                                <span className="text-gray-800 font-semibold text-sm leading-tight">
+                                    {card.label}
+                                </span>
+                            </div>
+                        ))}
                     </div>
 
-                    <div className="relative w-full">
-                        {/* Left Arrow (Positioned Outside) */}
-                        <button
-                            onClick={() => scroll('left')}
-                            className="absolute -left-12 top-1/2 -translate-y-1/2 z-20
-                                                flex items-center justify-center
-                                                w-8 h-8 rounded-full
-                                                text-white/80 hover:text-white
-                                                bg-white/5 hover:bg-white/10
-                                                border border-white/10
-                                                backdrop-blur-sm transition-all"
-                        >
-                            ❮
-                        </button>
-
-                        {/* Scroll Area (Reduced padding since arrows are outside) */}
-                        <div
-                            ref={sliderRef}
-                            className="flex items-center gap-4
-                                                w-full h-[12vw] min-h-[90px] max-h-[120px]
-                                                px-4 
-                                                rounded-2xl
-                                                bg-gradient-to-r from-white/5 via-white/3 to-white/5
-                                                border border-white/10
-                                                shadow-[0_20px_40px_rgba(0,0,0,0.45)]
-                                                overflow-x-auto scroll-smooth no-scrollbar"
-                        >
-                            {/* CARD 1: DevOps */}
-                            <div
-                                className="flex items-center gap-3
-                                                        min-w-[20vw] max-w-[240px]
-                                                        h-[9vw] min-h-[70px] max-h-[90px]
-                                                        px-4 bg-white rounded-xl
-                                                        shadow-sm border border-gray-100
-                                                        text-sm text-gray-900 font-bold shrink-0"
-                            >
-                                <div className="flex items-center justify-center w-9 h-9 rounded-full bg-violet-50">
-                                    <span className="text-xl text-violet-600 mb-1">∞</span>
-                                </div>
-                                <span className="text-gray-800 font-semibold text-sm">
-                                    DevOps Engineer
-                                </span>
-                            </div>
-
-                            {/* CARD 2: Data Analyst */}
-                            <div
-                                className="flex items-center gap-3
-                                                        min-w-[20vw] max-w-[240px]
-                                                        h-[9vw] min-h-[70px] max-h-[90px]
-                                                        px-4 bg-white rounded-xl
-                                                        shadow-sm border border-gray-100
-                                                        text-sm text-gray-900 font-bold shrink-0"
-                            >
-                                <div className="flex items-center justify-center w-9 h-9 rounded-full bg-sky-50">
-                                    <div className="flex items-end gap-[2px]">
-                                        <div className="w-1.5 h-2 bg-sky-400 rounded-t-[1px]"></div>
-                                        <div className="w-1.5 h-3 bg-sky-500 rounded-t-[1px]"></div>
-                                        <div className="w-1.5 h-4 bg-sky-600 rounded-t-[1px]"></div>
-                                    </div>
-                                </div>
-                                <span className="text-gray-800 font-semibold text-sm">
-                                    Data Analyst
-                                </span>
-                            </div>
-
-                            {/* CARD 3: Machine Learning */}
-                            <div
-                                className="flex items-center gap-3
-                                                        min-w-[20vw] max-w-[240px]
-                                                        h-[9vw] min-h-[70px] max-h-[90px]
-                                                        px-4 bg-white rounded-xl
-                                                        shadow-sm border border-gray-100
-                                                        text-sm text-gray-900 font-bold shrink-0"
-                            >
-                                <div className="flex items-center justify-center w-9 h-9 rounded-full bg-indigo-50">
-                                    <div className="w-5 h-5 border-2 border-indigo-500 rounded flex items-center justify-center">
-                                        <div className="w-2 h-2 bg-indigo-500 rounded-full"></div>
-                                    </div>
-                                </div>
-                                <span className="text-gray-800 font-semibold text-sm">
-                                    Machine Learning
-                                </span>
-                            </div>
-
-                            {/* CARD 4: UI/UX (Extra card to test scrolling) */}
-                            <div
-                                className="flex items-center gap-3
-                                                        min-w-[20vw] max-w-[240px]
-                                                        h-[9vw] min-h-[70px] max-h-[90px]
-                                                        px-4 bg-white rounded-xl
-                                                        shadow-sm border border-gray-100
-                                                        text-sm text-gray-900 font-bold shrink-0"
-                            >
-                                <div className="flex items-center justify-center w-9 h-9 rounded-full bg-pink-50">
-                                    <span className="text-pink-500 font-serif italic text-lg">
-                                        Ux
-                                    </span>
-                                </div>
-                                <span className="text-gray-800 font-semibold text-sm">
-                                    UI/UX Designer
-                                </span>
-                            </div>
-                        </div>
-
-                        {/* Right Arrow (Positioned Outside) */}
-                        <button
-                            onClick={() => scroll('right')}
-                            className="absolute -right-12 top-1/2 -translate-y-1/2 z-20
-                                                flex items-center justify-center
-                                                w-8 h-8 rounded-full
-                                                text-white/80 hover:text-white
-                                                bg-white/5 hover:bg-white/10
-                                                border border-white/10
-                                                backdrop-blur-sm transition-all"
-                        >
-                            ❯
-                        </button>
-                    </div>
+                    {/* Right arrow */}
+                    <button
+                        onClick={() => scroll('right')}
+                        aria-label="Scroll right"
+                        className="absolute -right-10 z-20 flex items-center justify-center w-8 h-8 rounded-full
+                                   bg-white/5 hover:bg-white/15 border border-white/15
+                                   text-white/70 hover:text-white transition-all shrink-0"
+                    >
+                        <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
+                            <path d="M9 18l6-6-6-6" strokeLinecap="round" strokeLinejoin="round" />
+                        </svg>
+                    </button>
                 </div>
             </div>
         </div>
@@ -166,3 +124,4 @@ const Hero = () => {
 };
 
 export default Hero;
+

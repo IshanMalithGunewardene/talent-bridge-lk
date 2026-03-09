@@ -1,24 +1,68 @@
+import { useState, useEffect } from 'react';
 import Navbar from './assets/components/Navbar.jsx';
-import RolesGrid from './features/home/RolesGrid.jsx';
+import Footer from './assets/components/Footer.jsx';
+import Hero from './features/home/Hero.jsx';
+import Feedback from './features/home/feedBack.jsx';
+import HelpFaqSection from './features/home/faq.jsx';
+import Catogories from './features/home/catogories.jsx';
+import AuthPage from './features/auth/AuthPage.jsx';
+import { useAuth } from './features/auth/useAuth.js';
 
 function App() {
-    return (
-        <div className="min-h-screen w-full relative overflow-hidden font-sans bg-[#0c1322]">
-            {/* Background Ambient Glow Patterns */}
-            <div className="absolute inset-0 pointer-events-none z-0 opacity-80">
-                <div className="absolute top-[-15%] left-[-15%] w-[60%] h-[60%] bg-[#082d33] blur-[140px] rounded-full mix-blend-screen"></div>
-                <div className="absolute top-[20%] left-[25%] w-[50%] h-[50%] bg-[#2a134a] blur-[150px] rounded-full mix-blend-screen opacity-90"></div>
-                <div className="absolute bottom-[-10%] right-[-10%] w-[60%] h-[60%] bg-[#0f214f] blur-[150px] rounded-full mix-blend-screen"></div>
-            </div>
+    const { session, loading } = useAuth();
+    const [showAuth, setShowAuth] = useState(false);
 
-            {/* Main Content */}
-            <div className="relative z-10 w-full flex flex-col min-h-screen pb-16">
-                <Navbar />
-                
-                <div className="flex-1 flex flex-col items-center justify-center pt-8">
-                    <RolesGrid />
+    // Auto-close the auth overlay once the user successfully signs in
+    useEffect(() => {
+        if (session) setShowAuth(false);
+    }, [session]);
+
+    return (
+        <div className="p-0 overflow-x-hidden">
+
+            {/* ── Auth overlay — shown when Sign in is clicked and not yet authenticated ── */}
+            {showAuth && !session && !loading && (
+                <AuthPage onClose={() => setShowAuth(false)} />
+            )}
+
+            {/* ── Hero Section (full-screen) ── */}
+            <div className="relative h-screen w-screen overflow-hidden">
+
+                {/* Dark base background */}
+                <div className="absolute inset-0 bg-[#041A1C]" />
+
+                {/* Purple blob */}
+                <div className="absolute top-1/2 left-1/2 -translate-x-[60%] -translate-y-[55%]
+                                w-162.5 h-162.5 bg-purple-700 rounded-full blur-[160px] opacity-55 pointer-events-none" />
+
+                {/* Blue blob */}
+                <div className="absolute top-1/2 left-1/2 -translate-x-[35%] -translate-y-[40%]
+                                w-150 h-150 bg-blue-700 rounded-full blur-[160px] opacity-50 pointer-events-none" />
+
+                {/* Content layer */}
+                <div className="relative z-10 w-[88vw] mx-auto h-full flex flex-col">
+
+                    {/* Navbar — passes Sign in handler; hides button if already logged in */}
+                    <nav className="w-full pt-2">
+                        <Navbar
+                            onSignIn={() => setShowAuth(true)}
+                            session={session}
+                            loading={loading}
+                        />
+                    </nav>
+
+                    {/* Hero fills remaining space */}
+                    <div className="flex-1 flex flex-col pb-6">
+                        <Hero />
+                    </div>
                 </div>
             </div>
+
+            {/* ── Below-fold sections ── */}
+            <Catogories />
+            <Feedback />
+            <HelpFaqSection />
+            <Footer />
         </div>
     );
 }

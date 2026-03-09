@@ -34,14 +34,14 @@ const testimonials = [
   },
 ];
   return (
-    <section className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-r from-gray-900 via-purple-900 to-blue-900 px-6">
+    <section className="min-h-screen flex flex-col items-center justify-center bg-linear-to-r from-gray-900 via-purple-900 to-blue-900 px-6">
       <h1 className="text-3xl md:text-4xl font-bold text-white mt-2 mb-4">
         Feed Backs on Talent bridge LK
       </h1>
       <p className="text-gray-300 mb-30 text-center">
         Send your feed back what you thought on us
       </p>
-      <div className="w-full py-16 bg-gradient-to-br from-teal-900 via-blue-900 to-purple-900 overflow-hidden">
+      <div className="w-full py-16 bg-linear-to-br from-teal-900 via-blue-900 to-purple-900 overflow-hidden">
       
       {/* Scrolling Container */}
       <div className="flex w-max animate-scroll gap-8 px-8">
