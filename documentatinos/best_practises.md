@@ -1,181 +1,363 @@
-# Documentation for Best Practises
+Documentation for Best Practices
 
-[01 Folder Structure](#folder-structure)
+This document outlines the coding standards, project structure, and collaboration practices used in this repository. Following these conventions ensures the codebase remains consistent, maintainable, and easy for new contributors to understand.
 
-[02 Naming Conventions](#naming-conventions)
+01 Folder Structure
 
-[03 Indentation or spacing](#indentation-or-spacing)
+The project follows a modular React application structure that separates reusable UI, features, services, and utilities.
 
-[04 Repositories](#repositories)
-
-[05 Commit Conventions](#commit-conventions)
-
-[06 Branch Naming](#branch-naming)
-
-[07 Pull Requests](#pull-requests)
-
-[08 Environment and Secrets](#environment-and-secrets)
-
-[09 Testing](#testing)
-
-## Folder Structure
-
-```
 src/
-|-- assets/                  # Images, fonts, icons, static files
-|-- components/              # Reusable UI components (buttons, cards, navbars)
-|-- features/ or modules/    # Feature-specific code (containers, state, hooks)
-|-- hooks/                   # Custom React hooks
-|-- layouts/                 # Layout wrappers for screen structure
-|-- pages/                   # Page-level components or routes
-|-- services/                # API calls, data fetching logic
-|-- utils/                   # Utility functions and helpers
-|-- context/                 # React context providers
-|-- store/ or redux/         # Redux state management (actions, reducers)
-|-- styles/                  # Global styles, Tailwind config, theming
-|-- tests/                   # Test utilities and helpers (optional)
-|-- App.jsx                  # Main App component
-|-- index.js                 # Application entry point
-```
+|-- assets/ # Images, fonts, icons, and other static resources
+|-- components/ # Reusable UI components (buttons, cards, navbars)
+|-- features/ or modules/ # Feature-based modules (containers, hooks, state)
+|-- hooks/ # Custom React hooks
+|-- layouts/ # Layout wrappers that define page structure
+|-- pages/ # Route-level components or page views
+|-- services/ # API calls and external data fetching logic
+|-- utils/ # Helper functions and utility logic
+|-- context/ # React context providers
+|-- store/ or redux/ # Global state management (Redux actions, reducers)
+|-- styles/ # Global styles, Tailwind config, and theme files
+|-- tests/ # Shared testing utilities and helpers (optional)
+|-- App.jsx # Root application component
+|-- index.js # Application entry point
 
-## Naming Conventions
+Best Practices
 
--   **Default (files and directories)**: kebab-case
+         Keep feature-related logic grouped together when possible.
 
-    -   Examples: `landing-page.jsx`, `user-profile`, `date-utils.js`
+         Avoid placing business logic inside UI components.
 
--   **React components**: PascalCase (filename and component name)
+         Prefer small, reusable components rather than large monolithic files.
 
-    -   Examples: `Navbar.jsx`, `UserCard.jsx`
+         Move shared logic to utils, hooks, or services.
 
--   **Variables and functions**: camelCase
+02 Naming Conventions
 
-    -   Examples: `isLoggedIn`, `fetchUserData`
+Consistent naming improves readability and helps developers quickly understand the role of each file or variable.
 
--   **Constants**: UPPER_SNAKE_CASE
+Default (Files and Directories)
 
-    -   Examples: `API_BASE_URL`, `DEFAULT_TIMEOUT_MS`
-
--   **CSS/SCSS modules**: kebab-case
-
-    -   Examples: `user-card.module.css`, `global-styles.css`
-
--   **Test files**: match source filename with `.test` or `.spec`
-
-    -   Examples: `user-card.test.jsx`, `date-utils.spec.js`
-
--   **Avoid**: snake_case and spaces in filenames
--   **Reason**: Align with common JS/React norms to reduce inconsistency and mental overhead.
-
-### Examples
-
-```
-src/
-|-- components/
-|   |-- Navbar.jsx            // component (PascalCase)
-|   |-- UserCard.jsx          // component (PascalCase)
-|
-|-- pages/
-|   |-- landing-page.jsx      // page file (kebab-case)
-|
-|-- utils/
-|   |-- date-utils.js         // utility (kebab-case), exports camelCase funcs
-|
-|-- styles/
-|   |-- global-styles.css
-```
-
-### Summary
-
-Quick reference:
-
-| Item                  | Convention              | Example                         |
-| --------------------- | ----------------------- | ------------------------------- |
-| Files & directories   | kebab-case              | `user-profile`, `date-utils.js` |
-| React components      | PascalCase              | `UserCard.jsx`, `Navbar.jsx`    |
-| Variables & functions | camelCase               | `isLoggedIn`, `fetchUserData`   |
-| Constants             | UPPER_SNAKE_CASE        | `API_BASE_URL`                  |
-| Tests                 | match + `.test`/`.spec` | `user-card.test.jsx`            |
-
-## Indentation or spacing
-
-Use 4 spaces for indentation to improve readability and maintain consistency across the project.
-
-In VS Code, default tab size may be 2. Change it via Settings (Ctrl + ,), search "tab size" and set to 4. Ensure the workspace respects `.editorconfig` (this repo sets indent_size to 4).
-
-If you use a formatter, configure it to 4 spaces or let `.editorconfig` control it.
-
-## Repositories
-
-Main repository: [`talentbridgelk`](https://github.com/IshanMalithGunewardene/talentbridgelk)
-
--   `main` branch: production-ready, finalized releases.
-
-    -   Link: [`/tree/main`](https://github.com/IshanMalithGunewardene/talentbridgelk/tree/main)
-
--   `testing-front-end` branch: isolate front-end development for easier tracking.
-
-    -   Link: [`/tree/testing-font-end`](https://github.com/IshanMalithGunewardene/talentbridgelk/tree/testing-font-end)
-
--   `testing-back-end` branch: isolate back-end development.
-
-    -   Link: [`/tree/testing-back-end`](https://github.com/IshanMalithGunewardene/talentbridgelk/tree/testing-back-end)
-
--   `quality-assurance` branch: pre-release QA across front-end and back-end.
-    -   Link: [`/tree/quality-assurance`](https://github.com/IshanMalithGunewardene/talentbridgelk/tree/quality-assurance)
-
-## Commit Conventions
-
-Follow Conventional Commits to make history readable and automatable:
-
--   `feat`: add a new feature
--   `fix`: bug fix
--   `docs`: documentation only changes
--   `style`: formatting, missing semi colons, etc; no code change
--   `refactor`: code change that neither fixes a bug nor adds a feature
--   `perf`: performance improvements
--   `test`: add or update tests
--   `chore`: tooling, build, CI, dependencies
+Use kebab-case.
 
 Examples:
 
--   `feat(auth): add JWT refresh token rotation`
--   `fix(api): handle 500s with retry and backoff`
+      landing-page.jsx
+      user-profile
+      date-utils.js
 
-## Branch Naming
+React Components
 
-Use kebab-case with a short prefix:
+Use PascalCase for both the filename and the component name.
 
--   Features: `feat/short-description`
--   Fixes: `fix/issue-or-bug`
--   Chores: `chore/task-name`
--   Experiments/Spikes: `exp/topic`
+Examples:
 
-Include an issue ID if available, e.g., `feat/123-user-onboarding`.
+    Navbar.jsx
+    UserCard.jsx
+    JobListingCard.jsx
 
-## Pull Requests
+Variables and Functions
 
--   Small, focused PRs (prefer < 400 lines changed).
--   Provide a clear description, screenshots for UI changes, and testing notes.
--   Link related issues.
--   Checklist before requesting review:
-    -   Lints pass
-    -   Builds locally
-    -   Tests updated/added and passing
-    -   No console errors in critical flows
+Use camelCase.
 
-## Environment and Secrets
+Examples:
 
--   Store environment variables in `.env.local` (not committed) and document required keys in `.env.example`.
--   Never commit secrets. Use your platform’s secret manager for deployments.
--   Example keys:
-    -   `API_BASE_URL`
-    -   `NODE_ENV`
-    -   `JWT_PUBLIC_KEY`
+    isLoggedIn
+    fetchUserData
+    calculateTotalPrice
+     Constants
 
-## Testing
+Use UPPER_SNAKE_CASE for values that do not change.
 
--   Unit tests for utils and pure functions.
--   Component tests for critical UI (render, props, events).
--   Integration tests for key flows (auth, checkout, forms).
--   Naming: mirror file + `.test` or `.spec`.
+Examples:
+
+API_BASE_URL
+DEFAULT_TIMEOUT_MS
+MAX_RETRY_COUNT
+CSS / SCSS Modules
+
+Use kebab-case.
+
+Examples:
+
+user-card.module.css
+global-styles.css
+dashboard-layout.module.scss
+Test Files
+
+Test filenames should mirror the source file name and include .test or .spec.
+
+Examples:
+
+user-card.test.jsx
+date-utils.spec.js
+auth-service.test.js
+Avoid
+
+snake_case filenames
+
+Spaces in filenames
+
+Inconsistent casing styles
+
+These practices align with common JavaScript and React ecosystem standards, reducing confusion and improving collaboration.
+
+Examples
+src/
+|-- components/
+| |-- Navbar.jsx // component (PascalCase)
+| |-- UserCard.jsx // component (PascalCase)
+|
+|-- pages/
+| |-- landing-page.jsx // page file (kebab-case)
+|
+|-- utils/
+| |-- date-utils.js // utility (kebab-case), exports camelCase functions
+|
+|-- styles/
+| |-- global-styles.css
+Quick Reference
+Item Convention Example
+Files & directories kebab-case user-profile, date-utils.js
+React components PascalCase UserCard.jsx, Navbar.jsx
+Variables & functions camelCase isLoggedIn, fetchUserData
+Constants UPPER_SNAKE_CASE API_BASE_URL
+Tests match + .test / .spec user-card.test.jsx
+03 Indentation or Spacing
+
+Use 4 spaces for indentation to maintain readability and consistent formatting across the project.
+
+VS Code Configuration
+
+By default, VS Code may use 2 spaces.
+
+To change this:
+
+Open Settings (Ctrl + ,)
+
+Search for Tab Size
+
+Set Tab Size = 4
+
+Ensure the workspace respects the repository’s .editorconfig, which defines:
+
+indent_size = 4
+Formatter Notes
+
+If using a formatter such as Prettier, ensure it is configured to use 4 spaces, or allow .editorconfig to control the indentation.
+
+04 Repositories
+
+Main repository:
+
+talentbridgelk
+
+GitHub link:
+
+https://github.com/IshanMalithGunewardene/talentbridgelk
+
+Branch Structure
+
+main
+
+Production-ready code and finalized releases.
+
+/tree/main
+
+testing-front-end
+
+Isolated branch for front-end development.
+
+/tree/testing-front-end
+
+testing-back-end
+
+Isolated branch for back-end development.
+
+/tree/testing-back-end
+
+quality-assurance
+
+Used for pre-release testing and QA validation before merging into production.
+
+/tree/quality-assurance
+05 Commit Conventions
+
+This repository follows Conventional Commits to maintain a clear and structured commit history.
+
+This makes it easier to:
+
+Track changes
+
+Generate changelogs
+
+Understand project evolution
+
+Commit Types
+Type Description
+feat Add a new feature
+fix Bug fix
+docs Documentation changes only
+style Formatting changes (no logic change)
+refactor Code change that neither fixes a bug nor adds a feature
+perf Performance improvements
+test Add or update tests
+chore Tooling, build, dependencies
+Examples
+feat(auth): add JWT refresh token rotation
+fix(api): handle 500 errors with retry and backoff
+docs(readme): update installation instructions
+refactor(user): simplify profile state handling
+06 Branch Naming
+
+Branch names should be short, descriptive, and follow kebab-case.
+
+Format
+type/short-description
+Examples
+
+Features:
+
+feat/user-onboarding
+feat/job-filtering
+
+Fixes:
+
+fix/login-validation
+fix/api-timeout
+
+Chores:
+
+chore/update-dependencies
+chore/setup-eslint
+
+Experiments / spikes:
+
+exp/new-search-algorithm
+exp/ui-prototype
+
+If an issue ID exists, include it:
+
+feat/123-user-onboarding
+fix/87-login-bug
+07 Pull Requests
+
+Pull requests should remain small, focused, and easy to review.
+
+Guidelines
+
+    Prefer less than 400 lines of changes when possible.
+
+     Provide a clear description of what the PR does.
+
+     Include screenshots for UI-related changes.
+
+     Link related issues or tickets.
+
+    Checklist Before Requesting Review
+
+Ensure:
+
+Linting passes
+
+Project builds locally
+
+Tests are added or updated
+
+Tests pass successfully
+
+No console errors in critical flows
+
+08 Environment and Secrets
+
+Environment variables must be handled securely.
+
+Rules
+
+Store environment variables in:
+
+        .env.local
+
+This file must not be committed.
+
+Document required variables in:
+
+.env.example
+
+Example Variables
+API_BASE_URL
+NODE_ENV
+JWT_PUBLIC_KEY
+Security Best Practices
+
+Never commit secrets to the repository.
+
+Use your hosting platform’s secret manager for deployment.
+
+Rotate keys periodically if possible.
+
+09 Testing
+
+Testing ensures the stability and reliability of the application.
+
+Recommended Test Types
+
+Unit Tests
+
+Test small, isolated pieces of logic.
+
+Examples:
+
+Utility functions
+
+Data formatters
+
+    Validation logic
+
+Component Tests
+
+Test UI components in isolation.
+
+Examples:
+
+    Rendering
+
+    Props behavior
+
+     User interactions
+
+Integration Tests
+
+Test complete user flows across multiple components.
+
+Examples:
+
+     Authentication flow
+
+    Form submission
+
+    Checkout process
+
+Test Naming
+
+Mirror the source filename.
+
+Examples:
+
+     date-utils.js
+     date-utils.test.js
+
+     user-card.jsx
+     user-card.test.jsx
+
+✅ Result
+
+Your documentation now:
+
+     Reads more professional
+
+     Is easier for new developers
+
+    Follows industry documentation standards
+
+    Keeps all your original rules unchanged
