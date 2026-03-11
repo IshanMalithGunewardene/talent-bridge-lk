@@ -106,11 +106,11 @@ const Hero = ({ onSelectRole, onSearch }) => {
     return (
         <div className="flex flex-col h-full justify-center">
             {/* ── Hero text + search ── */}
-            <div className="flex flex-col items-center text-center gap-4 flex-1 justify-center">
-                <h1 className="text-5xl font-bold leading-tight tracking-tight">
+            <div className="flex flex-col items-center text-center gap-4 flex-1 justify-center px-2">
+                <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold leading-tight tracking-tight">
                     Meet Talentbridge LK
                 </h1>
-                <p className="text-[1rem] text-white/60">
+                <p className="text-[0.95rem] sm:text-[1rem] text-white/60">
                     Search for better intern or job and learn to qualified
                 </p>
 
@@ -123,17 +123,17 @@ const Hero = ({ onSelectRole, onSearch }) => {
                             onChange={(e) => setQuery(e.target.value)}
                             onKeyDown={handleKeyDown}
                             onFocus={() => results.length > 0 && setOpen(true)}
-                            className="flex-1 bg-transparent text-white placeholder:text-white/40 text-sm pl-5 pr-3 py-2 focus:outline-none"
+                            className="flex-1 bg-transparent text-white placeholder:text-white/40 text-sm pl-4 sm:pl-5 pr-2 py-2 focus:outline-none min-w-0"
                             placeholder="find any job or intern you want"
                         />
                         <button
                             onClick={handleSearch}
-                            className="flex items-center gap-2 bg-white text-black rounded-full px-6 py-2 font-semibold text-sm hover:bg-gray-100 transition-all duration-200 shadow-sm shrink-0">
+                            className="flex items-center gap-1.5 sm:gap-2 bg-white text-black rounded-full px-4 sm:px-6 py-2 font-semibold text-sm hover:bg-gray-100 transition-all duration-200 shadow-sm shrink-0">
                             <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2.2" viewBox="0 0 24 24">
                                 <circle cx="11" cy="11" r="7" />
                                 <path d="M21 21l-4.35-4.35" strokeLinecap="round" />
                             </svg>
-                            Search
+                            <span className="hidden sm:inline">Search</span>
                         </button>
                     </div>
 
@@ -188,7 +188,7 @@ const Hero = ({ onSelectRole, onSearch }) => {
                 </div>
 
                 {/* hint */}
-                <p className="text-xs text-white/40 self-start ml-[calc(50%-260px)]">
+                <p className="text-xs text-white/40 self-start sm:ml-[calc(50%-260px)]">
                     Ex : React Internships
                 </p>
             </div>
@@ -201,11 +201,11 @@ const Hero = ({ onSelectRole, onSearch }) => {
 
                 {/* Slider wrapper */}
                 <div className="relative flex items-center">
-                    {/* Left arrow */}
+                    {/* Left arrow — hidden on mobile (swipe instead) */}
                     <button
                         onClick={() => scroll('left')}
                         aria-label="Scroll left"
-                        className="absolute -left-10 z-20 flex items-center justify-center w-8 h-8 rounded-full
+                        className="hidden sm:flex absolute -left-10 z-20 items-center justify-center w-8 h-8 rounded-full
                                    bg-white/5 hover:bg-white/15 border border-white/15
                                    text-white/70 hover:text-white transition-all shrink-0"
                     >
@@ -227,7 +227,7 @@ const Hero = ({ onSelectRole, onSearch }) => {
                                 key={idx}
                                 onClick={() => onSelectRole?.(card.label)}
                                 className="flex items-center gap-3
-                                           min-w-50 max-w-57.5 h-17
+                                           min-w-44 sm:min-w-50 max-w-57.5 h-17
                                            px-4 bg-white rounded-xl
                                            shadow-sm border border-gray-100
                                            cursor-pointer hover:shadow-md transition-shadow shrink-0"
@@ -235,18 +235,18 @@ const Hero = ({ onSelectRole, onSearch }) => {
                                 <div className="w-10 h-10 flex items-center justify-center rounded-lg bg-gray-50 shrink-0">
                                     <img src={card.icon} alt={card.label} className="w-7 h-7 object-contain" />
                                 </div>
-                                <span className="text-gray-800 font-semibold text-sm leading-tight">
+                                <span className="text-gray-800 font-semibold text-xs sm:text-sm leading-tight">
                                     {card.label}
                                 </span>
                             </div>
                         ))}
                     </div>
 
-                    {/* Right arrow */}
+                    {/* Right arrow — hidden on mobile */}
                     <button
                         onClick={() => scroll('right')}
                         aria-label="Scroll right"
-                        className="absolute -right-10 z-20 flex items-center justify-center w-8 h-8 rounded-full
+                        className="hidden sm:flex absolute -right-10 z-20 items-center justify-center w-8 h-8 rounded-full
                                    bg-white/5 hover:bg-white/15 border border-white/15
                                    text-white/70 hover:text-white transition-all shrink-0"
                     >

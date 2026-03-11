@@ -100,7 +100,7 @@ function AboutUs({ onNavigate }) {
             <div className="absolute top-0 left-1/4 w-150 h-150 bg-purple-700 rounded-full blur-[200px] opacity-30 pointer-events-none -z-10" />
             <div className="absolute bottom-1/4 right-1/4 w-125 h-125 bg-blue-700 rounded-full blur-[200px] opacity-25 pointer-events-none -z-10" />
 
-            <div className="w-[88vw] mx-auto pb-24">
+            <div className="w-[92vw] sm:w-[88vw] mx-auto pb-24">
 
                 {/* ── Hero ── */}
                 <div className="flex flex-col items-center text-center pt-20 pb-16">
@@ -214,7 +214,7 @@ function AboutUs({ onNavigate }) {
                 </div>
 
                 {/* ── CTA ── */}
-                <div className="flex flex-col items-center text-center bg-white/5 border border-white/10 rounded-3xl px-8 py-14">
+                <div className="flex flex-col items-center text-center bg-white/5 border border-white/10 rounded-3xl px-4 sm:px-8 py-10 sm:py-14">
                     <h2 className="text-2xl md:text-3xl font-bold mb-3">Ready to find your next opportunity?</h2>
                     <p className="text-white/50 max-w-md mb-8 text-sm leading-relaxed">
                         Explore hundreds of internships and entry-level jobs from top Sri Lankan tech companies,

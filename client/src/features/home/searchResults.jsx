@@ -244,7 +244,7 @@ function SearchResults({ initialQuery = '', onBack, onSelectRole }) {
             <div className="w-[90vw] mx-auto pt-8 pb-20">
 
                 {/* ── Top bar: back + search ── */}
-                <div className="flex items-center gap-4 mb-8">
+                <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 mb-8">
                     {/* Back button */}
                     <button
                         onClick={onBack}
@@ -281,7 +281,8 @@ function SearchResults({ initialQuery = '', onBack, onSelectRole }) {
                 </div>
 
                 {/* ── Filters row ── */}
-                <div className="flex flex-wrap items-center gap-3 mb-6">
+                <div className="mb-6">
+                    <div className="flex flex-wrap items-center gap-3">
                     <span className="text-white/50 text-sm">Filter by:</span>
 
                     {/* Role filter */}
@@ -302,7 +303,7 @@ function SearchResults({ initialQuery = '', onBack, onSelectRole }) {
                     </div>
 
                     {/* Divider */}
-                    <div className="w-px h-5 bg-white/15" />
+                    <div className="w-px h-5 bg-white/15 hidden sm:block" />
 
                     {/* Type filter */}
                     {ALL_TYPES.map((t) => (
@@ -323,6 +324,7 @@ function SearchResults({ initialQuery = '', onBack, onSelectRole }) {
                         </button>
                     ))}
                 </div>
+                </div>
 
                 {/* ── Results header ── */}
                 <div className="flex items-center justify-between mb-5">
@@ -340,7 +342,7 @@ function SearchResults({ initialQuery = '', onBack, onSelectRole }) {
                 </div>
 
                 {/* ── Two-column layout ── */}
-                <div className="flex gap-6 items-start">
+                <div className="flex flex-col lg:flex-row gap-6 items-start">
 
                     {/* ── Left: results grid ── */}
                     <div className="flex-1 min-w-0">
@@ -376,7 +378,7 @@ function SearchResults({ initialQuery = '', onBack, onSelectRole }) {
                     </div>
 
                     {/* ── Right: summary sidebar ── */}
-                    <div className="w-72 shrink-0 hidden lg:block">
+                    <div className="w-full lg:w-72 lg:shrink-0 hidden lg:block">
 
                         {/* Roles breakdown */}
                         <div className="bg-white/5 border border-white/10 rounded-2xl p-5 mb-4">

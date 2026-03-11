@@ -412,9 +412,9 @@ function JobsAndInterns({ role = 'Frontend Developer', onSearch }) {
             <div className="w-[88vw] mx-auto pt-10 pb-16">
 
                 {/* ── Header ── */}
-                <div className="mb-8 flex items-center justify-between gap-6 flex-wrap">
+                <div className="mb-8 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                     <div>
-                        <h1 className="text-2xl font-bold text-white tracking-tight">{role}</h1>
+                        <h1 className="text-xl sm:text-2xl font-bold text-white tracking-tight">{role}</h1>
                         <p className="text-white/60 text-sm mt-1">
                             select your job role related to{' '}
                             <span className="text-[#4ade80] font-medium">{jobRoleTag}</span>
@@ -422,7 +422,7 @@ function JobsAndInterns({ role = 'Frontend Developer', onSearch }) {
                     </div>
 
                     {/* Search bar */}
-                    <div className="flex items-center gap-2 bg-white/6 border border-white/15 rounded-xl px-3 py-2 focus-within:border-violet-400/50 focus-within:bg-white/8 transition-all duration-200 w-72">
+                    <div className="flex items-center gap-2 bg-white/6 border border-white/15 rounded-xl px-3 py-2 focus-within:border-violet-400/50 focus-within:bg-white/8 transition-all duration-200 w-full sm:w-72">
                         <svg className="w-4 h-4 text-white/35 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                             <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-4.35-4.35M17 11A6 6 0 1 1 5 11a6 6 0 0 1 12 0z" />
                         </svg>
@@ -444,17 +444,17 @@ function JobsAndInterns({ role = 'Frontend Developer', onSearch }) {
                     </div>
                 </div>
 
-                {/* ── Two-column layout ── */}
-                <div className="flex gap-6 items-start">
+                {/* ── Layout: stacks on mobile, side-by-side on lg ── */}
+                <div className="flex flex-col lg:flex-row gap-6 items-start">
 
                     {/* ── Left: job cards ── */}
-                    <div className="flex-1 min-w-0">
+                    <div className="flex-1 min-w-0 w-full">
                         <p className="text-white/70 text-sm font-medium mb-4">
                             Top jobs/intern available right now
                         </p>
 
-                        {/* 2-column grid */}
-                        <div className="grid grid-cols-2 gap-4">
+                        {/* 1-col on mobile, 2-col on sm+ */}
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                             {visibleJobs.map((job) => (
                                 <JobCard key={job.id} {...job} onClick={() => setSelectedJob(job)} />
                             ))}
@@ -465,7 +465,7 @@ function JobsAndInterns({ role = 'Frontend Developer', onSearch }) {
                     </div>
 
                     {/* ── Right: Road Map ── */}
-                    <div className="w-[320px] shrink-0 bg-white/5 border border-white/10 rounded-2xl px-6 py-6">
+                    <div className="w-full lg:w-[320px] lg:shrink-0 bg-white/5 border border-white/10 rounded-2xl px-6 py-6">
                         <h2 className="text-2xl font-bold text-white leading-tight">Road Map for</h2>
                         <p className="text-white/50 text-xs mb-5 mt-0.5">apply these jobs</p>
 

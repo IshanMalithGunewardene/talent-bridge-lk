@@ -47,7 +47,7 @@ function App() {
             {page === 'settings' ? (
                 /* ── User Settings page ── */
                 <>
-                    <div className="relative z-10 w-[88vw] mx-auto pt-2">
+                    <div className="relative z-10 w-full px-4 sm:w-[88vw] sm:px-0 sm:mx-auto pt-2">
                         <Navbar
                             onSignIn={() => setShowAuth(true)}
                             session={session}
@@ -62,7 +62,7 @@ function App() {
             ) : page === 'about' ? (
                 /* ── About Us page ── */
                 <>
-                    <div className="relative z-10 w-[88vw] mx-auto pt-2">
+                    <div className="relative z-10 w-full px-4 sm:w-[88vw] sm:px-0 sm:mx-auto pt-2">
                         <Navbar
                             onSignIn={() => setShowAuth(true)}
                             session={session}
@@ -77,7 +77,7 @@ function App() {
             ) : page === 'search' ? (
                 /* ── Search Results page ── */
                 <>
-                    <div className="relative z-10 w-[88vw] mx-auto pt-2">
+                    <div className="relative z-10 w-full px-4 sm:w-[88vw] sm:px-0 sm:mx-auto pt-2">
                         <Navbar
                             onSignIn={() => setShowAuth(true)}
                             session={session}
@@ -97,7 +97,7 @@ function App() {
                 /* ── Jobs / Interns page ── */
                 <>
                     {/* Sticky navbar on the jobs page */}
-                    <div className="relative z-10 w-[88vw] mx-auto pt-2">
+                    <div className="relative z-10 w-full px-4 sm:w-[88vw] sm:px-0 sm:mx-auto pt-2">
                         <Navbar
                             onSignIn={() => setShowAuth(true)}
                             session={session}
@@ -127,7 +127,7 @@ function App() {
                                         w-150 h-150 bg-blue-700 rounded-full blur-[160px] opacity-50 pointer-events-none" />
 
                         {/* Content layer */}
-                        <div className="relative z-10 w-[88vw] mx-auto h-full flex flex-col">
+                        <div className="relative z-10 w-full px-4 sm:w-[88vw] sm:px-0 sm:mx-auto h-full flex flex-col">
 
                             {/* Navbar — passes Sign in handler; hides button if already logged in */}
                             <nav className="w-full pt-2">

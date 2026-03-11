@@ -61,8 +61,8 @@ export default function UserSettings({ session, onNavigate }) {
                     <div className="h-28 bg-linear-to-r from-purple-800/60 via-blue-800/50 to-purple-800/60" />
 
                     {/* Avatar + name */}
-                    <div className="px-8 pb-8">
-                        <div className="flex items-end justify-between -mt-12 mb-6">
+                    <div className="px-4 sm:px-8 pb-8">
+                        <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 -mt-12 mb-6">
                             {/* Avatar */}
                             <div className="w-24 h-24 rounded-full bg-[#0b1225] border-4 border-[#041A1C] flex items-center justify-center shadow-xl overflow-hidden">
                                 <img src={userProfileIcon} alt="Profile" className="w-16 h-16 opacity-85" />
@@ -172,7 +172,7 @@ export default function UserSettings({ session, onNavigate }) {
                 {/* ── Session / Sign out ── */}
                 <div className="mt-6 bg-red-500/5 border border-red-500/20 rounded-2xl px-6 py-5">
                     <p className="text-red-400/70 text-xs uppercase tracking-widest font-semibold mb-4">Session</p>
-                    <div className="flex items-center justify-between">
+                    <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
                         <div>
                             <p className="text-white/70 text-sm font-medium">Sign out of Talentbridge LK</p>
                             <p className="text-white/35 text-xs mt-0.5">You will be returned to the home page</p>
