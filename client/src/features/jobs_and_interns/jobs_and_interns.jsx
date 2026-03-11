@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { createPortal } from 'react-dom';
 import suitCase from './assets/suitCase.svg';
-import { jobData } from './dt_/dt.js';
+import { useJobPostings } from './useJobPostings.js';
 import SkillResources from './SkillResources.jsx';
 import { useProgress } from './useProgress.js';
 
@@ -221,7 +221,7 @@ function JobModal({ job, onClose }) {
 
 // ── Job Card ──────────────────────────────────────────────────────────────────
 
-function JobCard({ title, company, location, type, deadline, onClick }) {
+function JobCard({ title, company, location, type, deadline, onClick, fromRecruiter }) {
     return (
         <div onClick={onClick} className="flex items-center gap-4 bg-white/5 border border-white/10 rounded-xl px-4 py-4 hover:bg-white/10 transition-all duration-200 cursor-pointer group">
             {/* Icon */}
@@ -231,9 +231,16 @@ function JobCard({ title, company, location, type, deadline, onClick }) {
 
             {/* Text */}
             <div className="min-w-0 flex-1">
-                <p className="text-white text-[0.85rem] font-semibold leading-tight group-hover:text-white/90 truncate">
-                    {title}
-                </p>
+                <div className="flex items-center gap-2">
+                    <p className="text-white text-[0.85rem] font-semibold leading-tight group-hover:text-white/90 truncate">
+                        {title}
+                    </p>
+                    {fromRecruiter && (
+                        <span className="shrink-0 text-[0.6rem] px-1.5 py-0.5 rounded-full bg-emerald-500/15 border border-emerald-400/30 text-emerald-300 font-semibold uppercase tracking-wide">
+                            New
+                        </span>
+                    )}
+                </div>
                 <p className="text-white/50 text-xs mt-0.5 truncate">{company} · {location}</p>
                 <div className="flex items-center gap-2 mt-1">
                     <span className="text-white/40 text-[0.7rem]">{type}</span>
@@ -401,7 +408,10 @@ function JobsAndInterns({ role = 'Frontend Developer', onSearch, session }) {
     const [showRoleResources, setShowRoleResources] = useState(false);
     const [searchQuery, setSearchQuery] = useState('');
 
-    // Persist progress to MongoDB keyed by supabase user id + role
+    // Live job listings — hardcoded + recruiter postings from Supabase
+    const { jobData, loading: jobsLoading } = useJobPostings();
+
+    // Persist progress to Supabase keyed by supabase user id + role
     const userId = session?.user?.id ?? null;
     const { completedSkills, toggleSkill: toggleSkillComplete } = useProgress(userId, role);
 
@@ -423,7 +433,7 @@ function JobsAndInterns({ role = 'Frontend Developer', onSearch, session }) {
     const jobRoleTag = config.tag;
     const roadmapSkills = config.roadmap;
 
-    // Derive listings and pagination dynamically from dt.js
+    // Derive listings and pagination — merged hardcoded + Supabase
     const allJobs = jobData[role] ?? jobData['Frontend Developer'];
     const totalPages = Math.ceil(allJobs.length / CARDS_PER_PAGE);
     const start = page * CARDS_PER_PAGE;
@@ -485,9 +495,14 @@ function JobsAndInterns({ role = 'Frontend Developer', onSearch, session }) {
 
                         {/* 1-col on mobile, 2-col on sm+ */}
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                            {visibleJobs.map((job) => (
-                                <JobCard key={job.id} {...job} onClick={() => setSelectedJob(job)} />
-                            ))}
+                            {jobsLoading
+                                ? Array.from({ length: 6 }).map((_, i) => (
+                                    <div key={i} className="h-19 rounded-xl bg-white/5 border border-white/10 animate-pulse" />
+                                ))
+                                : visibleJobs.map((job) => (
+                                    <JobCard key={job.id} {...job} fromRecruiter={job.fromRecruiter} onClick={() => setSelectedJob(job)} />
+                                ))
+                            }
                         </div>
 
                         {/* Pagination */}
