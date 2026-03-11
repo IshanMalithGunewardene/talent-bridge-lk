@@ -11,9 +11,10 @@ import JobsAndInterns from './features/jobs_and_interns/jobs_and_interns.jsx';
 import SearchResults from './features/home/searchResults.jsx';
 import AboutUs from './features/home/aboutUs.jsx';
 import UserSettings from './features/auth/userSettings.jsx';
+import RecruiterDashboard from './features/recruiter/RecruiterDashboard.jsx';
 
 function App() {
-    const { session, loading } = useAuth();
+    const { session, loading, userRole } = useAuth();
     const [showAuth, setShowAuth] = useState(false);
     const [page, setPage] = useState('home'); // 'home' | 'jobs' | 'search'
     const [selectedRole, setSelectedRole] = useState('Frontend Developer');
@@ -36,6 +37,13 @@ function App() {
         if (session) setShowAuth(false);
     }, [session]);
 
+    // Auto-redirect recruiters to their dashboard after login
+    useEffect(() => {
+        if (userRole === 'recruiter' && page === 'home') {
+            setPage('recruiter');
+        }
+    }, [userRole, page]);
+
     return (
         <div className="p-0 overflow-x-hidden">
 
@@ -54,6 +62,7 @@ function App() {
                             loading={loading}
                             activePage={page}
                             onNavigate={setPage}
+                            userRole={userRole}
                         />
                     </div>
                     <UserSettings session={session} onNavigate={setPage} />
@@ -69,6 +78,7 @@ function App() {
                             loading={loading}
                             activePage={page}
                             onNavigate={setPage}
+                            userRole={userRole}
                         />
                     </div>
                     <AboutUs onNavigate={setPage} />
@@ -84,6 +94,7 @@ function App() {
                             loading={loading}
                             activePage={page}
                             onNavigate={setPage}
+                            userRole={userRole}
                         />
                     </div>
                     <SearchResults
@@ -104,9 +115,26 @@ function App() {
                             loading={loading}
                             activePage={page}
                             onNavigate={setPage}
+                            userRole={userRole}
                         />
                     </div>
                     <JobsAndInterns role={selectedRole} onNavigate={setPage} onSearch={navigateToSearch} session={session} />
+                    <Footer />
+                </>
+            ) : page === 'recruiter' ? (
+                /* ── Recruiter Dashboard page ── */
+                <>
+                    <div className="relative z-10 w-full px-4 sm:w-[88vw] sm:px-0 sm:mx-auto pt-2">
+                        <Navbar
+                            onSignIn={() => setShowAuth(true)}
+                            session={session}
+                            loading={loading}
+                            activePage={page}
+                            onNavigate={setPage}
+                            userRole={userRole}
+                        />
+                    </div>
+                    <RecruiterDashboard session={session} />
                     <Footer />
                 </>
             ) : (
@@ -137,6 +165,7 @@ function App() {
                                     loading={loading}
                                     activePage={page}
                                     onNavigate={setPage}
+                                    userRole={userRole}
                                 />
                             </nav>
 

@@ -1,14 +1,21 @@
 import React, { useState } from 'react';
 import userProfileIcon from '../../features/auth/assets/user_profile.svg';
 
-function Navbar({ onSignIn, session, loading, activePage = 'home', onNavigate }) {
+function Navbar({ onSignIn, session, loading, activePage = 'home', onNavigate, userRole }) {
     const [menuOpen, setMenuOpen] = useState(false);
 
-    const navItems = [
-        { label: 'Home', page: 'home' },
-        { label: 'Jobs/Interns', page: 'jobs' },
-        { label: 'About us', page: 'about' },
-    ];
+    // Recruiters get a Dashboard link instead of Jobs/Interns
+    const navItems = userRole === 'recruiter'
+        ? [
+            { label: 'Home', page: 'home' },
+            { label: 'Dashboard', page: 'recruiter' },
+            { label: 'About us', page: 'about' },
+          ]
+        : [
+            { label: 'Home', page: 'home' },
+            { label: 'Jobs/Interns', page: 'jobs' },
+            { label: 'About us', page: 'about' },
+          ];
 
     const handleNav = (page) => {
         onNavigate?.(page);
