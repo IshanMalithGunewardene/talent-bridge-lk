@@ -41,6 +41,7 @@ function Field({ label, hint, children }) {
 }
 
 const inputCls = "w-full bg-white/5 border border-white/15 rounded-xl px-4 py-2.5 text-white/85 text-sm placeholder-white/25 focus:outline-none focus:border-emerald-400/50 focus:bg-white/8 transition-all";
+const selectCls = "w-full bg-[#0e2a2e] border border-white/15 rounded-xl px-4 py-2.5 text-white text-sm focus:outline-none focus:border-emerald-400/50 transition-all appearance-none cursor-pointer";
 const textareaCls = `${inputCls} resize-none`;
 
 // ── Job posting card ──────────────────────────────────────────────────────────
@@ -210,15 +211,31 @@ export default function RecruiterDashboard({ session }) {
                                 <input className={inputCls} value={form.company} onChange={(e) => set('company', e.target.value)} placeholder="e.g. Acme Pvt Ltd" />
                             </Field>
                             <Field label="Role Category">
-                                <select className={inputCls} value={form.role_category} onChange={(e) => set('role_category', e.target.value)}>
-                                    {ROLE_CATEGORIES.map((r) => <option key={r} value={r}>{r}</option>)}
-                                </select>
+                                <div className="relative">
+                                    <select className={selectCls} value={form.role_category} onChange={(e) => set('role_category', e.target.value)}>
+                                        {ROLE_CATEGORIES.map((r) => <option key={r} value={r} className="bg-[#0e2a2e] text-white">{r}</option>)}
+                                    </select>
+                                    <div className="pointer-events-none absolute inset-y-0 right-3 flex items-center">
+                                        <svg className="w-4 h-4 text-white/40" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                                            <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+                                        </svg>
+                                    </div>
+                                </div>
                             </Field>
                             <Field label="Job Type">
-                                <select className={inputCls} value={form.type} onChange={(e) => set('type', e.target.value)}>
-                                    <option value="Full-time">Full-time</option>
-                                    <option value="Part-time">Part-time</option>
-                                </select>
+                                <div className="relative">
+                                    <select className={selectCls} value={form.type} onChange={(e) => set('type', e.target.value)}>
+                                        <option value="Full-time" className="bg-[#0e2a2e] text-white">Full-time</option>
+                                        <option value="Part-time" className="bg-[#0e2a2e] text-white">Part-time</option>
+                                        <option value="Internship" className="bg-[#0e2a2e] text-white">Internship</option>
+                                        <option value="Contract" className="bg-[#0e2a2e] text-white">Contract</option>
+                                    </select>
+                                    <div className="pointer-events-none absolute inset-y-0 right-3 flex items-center">
+                                        <svg className="w-4 h-4 text-white/40" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                                            <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+                                        </svg>
+                                    </div>
+                                </div>
                             </Field>
                             <Field label="Location">
                                 <input className={inputCls} value={form.location} onChange={(e) => set('location', e.target.value)} placeholder="e.g. Colombo / Remote" />
