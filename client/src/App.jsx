@@ -106,7 +106,7 @@ function App() {
                             onNavigate={setPage}
                         />
                     </div>
-                    <JobsAndInterns role={selectedRole} onNavigate={setPage} onSearch={navigateToSearch} />
+                    <JobsAndInterns role={selectedRole} onNavigate={setPage} onSearch={navigateToSearch} session={session} />
                     <Footer />
                 </>
             ) : (

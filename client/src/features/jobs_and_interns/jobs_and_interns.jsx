@@ -3,6 +3,7 @@ import { createPortal } from 'react-dom';
 import suitCase from './assets/suitCase.svg';
 import { jobData } from './dt_/dt.js';
 import SkillResources from './SkillResources.jsx';
+import { useProgress } from './useProgress.js';
 
 // ── Per-role config ───────────────────────────────────────────────────────────
 
@@ -244,14 +245,34 @@ function JobCard({ title, company, location, type, deadline, onClick }) {
     );
 }
 
-function RoadmapTag({ label, onClick }) {
+function RoadmapTag({ label, onClick, completed, onToggleComplete }) {
     return (
-        <span
-            onClick={onClick}
-            className="px-4 py-1.5 rounded-full border border-white/20 bg-white/5 text-white/80 text-[0.78rem] font-medium whitespace-nowrap hover:bg-violet-600/30 hover:border-violet-400/40 hover:text-white transition-all duration-150 cursor-pointer select-none"
-            title={`View resources for ${label}`}
-        >
-            {label}
+        <span className="relative inline-flex items-center group">
+            <span
+                onClick={onClick}
+                className={`pl-4 py-1.5 rounded-full border text-[0.78rem] font-medium whitespace-nowrap transition-all duration-150 cursor-pointer select-none pr-8 ${
+                    completed
+                        ? 'border-emerald-400/50 bg-emerald-500/15 text-emerald-300'
+                        : 'border-white/20 bg-white/5 text-white/80 hover:bg-violet-600/30 hover:border-violet-400/40 hover:text-white'
+                }`}
+                title={`View resources for ${label}`}
+            >
+                {label}
+            </span>
+            {/* Tick toggle button overlaid on the right of the pill */}
+            <button
+                onClick={(e) => { e.stopPropagation(); onToggleComplete(); }}
+                title={completed ? 'Mark as incomplete' : 'Mark as complete'}
+                className={`absolute right-2 top-1/2 -translate-y-1/2 w-4 h-4 rounded-full flex items-center justify-center transition-all duration-150 ${
+                    completed
+                        ? 'bg-emerald-500 text-white'
+                        : 'bg-white/15 text-white/40 hover:bg-emerald-500/60 hover:text-white'
+                }`}
+            >
+                <svg className="w-2.5 h-2.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                </svg>
+            </button>
         </span>
     );
 }
@@ -373,12 +394,21 @@ function RoleResources({ role, roadmapSkills, onClose }) {
 
 // ── Main Page ─────────────────────────────────────────────────────────────────
 
-function JobsAndInterns({ role = 'Frontend Developer', onSearch }) {
+function JobsAndInterns({ role = 'Frontend Developer', onSearch, session }) {
     const [page, setPage] = useState(0);
     const [selectedJob, setSelectedJob] = useState(null);
     const [selectedSkill, setSelectedSkill] = useState(null);
     const [showRoleResources, setShowRoleResources] = useState(false);
     const [searchQuery, setSearchQuery] = useState('');
+
+    // Persist progress to MongoDB keyed by supabase user id + role
+    const userId = session?.user?.id ?? null;
+    const { completedSkills, toggleSkill: toggleSkillComplete } = useProgress(userId, role);
+
+    // Reset page when role changes
+    useEffect(() => {
+        setPage(0);
+    }, [role]);
 
     const handleSearch = () => {
         const q = searchQuery.trim();
@@ -476,13 +506,26 @@ function JobsAndInterns({ role = 'Frontend Developer', onSearch }) {
                                     {/* Step number + tags row */}
                                     <div className="flex items-center gap-3">
                                         {/* Step badge */}
-                                        <div className="shrink-0 w-5 h-5 rounded-full border border-white/25 bg-white/10
-                                                        flex items-center justify-center text-[0.6rem] font-bold text-white/60 select-none">
-                                            {rowIdx + 1}
+                                        <div className={`shrink-0 w-5 h-5 rounded-full border flex items-center justify-center text-[0.6rem] font-bold select-none transition-all duration-200 ${
+                                            row.every((skill) => completedSkills.has(skill))
+                                                ? 'border-emerald-400/60 bg-emerald-500/25 text-emerald-300'
+                                                : 'border-white/25 bg-white/10 text-white/60'
+                                        }`}>
+                                            {row.every((skill) => completedSkills.has(skill)) ? (
+                                                <svg className="w-2.5 h-2.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
+                                                    <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                                                </svg>
+                                            ) : rowIdx + 1}
                                         </div>
                                         <div className="flex flex-wrap gap-2">
                                             {row.map((skill, i) => (
-                                                <RoadmapTag key={i} label={skill} onClick={() => setSelectedSkill(skill)} />
+                                                <RoadmapTag
+                                                    key={i}
+                                                    label={skill}
+                                                    onClick={() => setSelectedSkill(skill)}
+                                                    completed={completedSkills.has(skill)}
+                                                    onToggleComplete={() => toggleSkillComplete(skill)}
+                                                />
                                             ))}
                                         </div>
                                     </div>
