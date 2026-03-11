@@ -1,6 +1,5 @@
 {
-  "buildCommand": "cd client && npm install && npm run build",
-  "outputDirectory": "client/dist",
-  "installCommand": "echo 'skip root install'",
-  "framework": null
+  "buildCommand": "npm install && npm run build",
+  "outputDirectory": "dist",
+  "framework": "vite"
 }
