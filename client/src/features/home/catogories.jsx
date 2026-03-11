@@ -49,7 +49,7 @@ const roles = [
     },
 ];
 
-const Catogories = () => {
+const Catogories = ({ onSelectRole }) => {
     return (
         <div className="w-screen min-h-screen flex items-center justify-center px-6">
             <div className="w-[90%] max-w-275">
@@ -57,6 +57,7 @@ const Catogories = () => {
                     {roles.map((role, idx) => (
                         <div
                             key={idx}
+                            onClick={() => onSelectRole?.(role.title)}
                             className="w-full max-w-[320px] bg-white rounded-2xl px-6 py-4 flex items-center gap-4 hover:scale-105 transition-transform duration-300 cursor-pointer shadow-[0_8px_30px_rgb(0,0,0,0.12)]"
                         >
                             <div className="shrink-0 flex items-center justify-center">

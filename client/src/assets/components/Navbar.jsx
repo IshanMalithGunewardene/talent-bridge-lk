@@ -1,47 +1,57 @@
 import React from 'react';
-import { supabase } from '../../lib/supabaseClient';
+import userProfileIcon from '../../features/auth/assets/user_profile.svg';
 
-function Navbar({ onSignIn, session, loading }) {
-    const handleSignOut = async () => {
-        await supabase.auth.signOut();
-    };
+function Navbar({ onSignIn, session, loading, activePage = 'home', onNavigate }) {
+
+    const navItems = [
+        { label: 'Home', page: 'home' },
+        { label: 'Jobs/Interns', page: 'jobs' },
+        { label: 'About us', page: 'about' },
+    ];
 
     return (
         <div className="flex justify-between items-center px-8 py-4 text-white">
             {/* Brand */}
-            <div className="text-xl font-bold tracking-wide cursor-pointer select-none">
+            <div
+                className="text-xl font-bold tracking-wide cursor-pointer select-none"
+                onClick={() => onNavigate?.('home')}
+            >
                 Talentbridge LK
             </div>
 
             {/* Nav links + auth button */}
             <div className="flex gap-10 items-center">
                 <ul className="flex gap-10 items-center text-[0.95rem] text-white/90">
-                    <li className="hover:text-white cursor-pointer transition-colors">
-                        Home
-                    </li>
-                    <li className="hover:text-white cursor-pointer transition-colors">
-                        Jobs/Interns
-                    </li>
-                    <li className="hover:text-white cursor-pointer transition-colors">
-                        About us
-                    </li>
+                    {navItems.map(({ label, page }) => (
+                        <li
+                            key={page}
+                            onClick={() => onNavigate?.(page)}
+                            className={`cursor-pointer transition-colors ${
+                                activePage === page
+                                    ? 'text-white font-semibold'
+                                    : 'text-white/70 hover:text-white'
+                            }`}
+                        >
+                            {label}
+                        </li>
+                    ))}
                 </ul>
 
                 {/* Don't render auth button until session state is resolved */}
                 {!loading && (
                     session ? (
-                        /* Logged-in state: avatar initial + Sign out */
-                        <div className="flex items-center gap-3">
-                            <div className="w-8 h-8 rounded-full bg-white/20 border border-white/30 flex items-center justify-center text-sm font-semibold select-none">
-                                {session.user?.email?.[0]?.toUpperCase() ?? '?'}
-                            </div>
-                            <button
-                                onClick={handleSignOut}
-                                className="bg-white/10 border border-white/20 text-white px-4 py-1.5 rounded-full text-sm hover:bg-white/20 transition-all duration-200"
-                            >
-                                Sign out
-                            </button>
-                        </div>
+                        /* Logged-in state: profile icon → settings */
+                        <button
+                            onClick={() => onNavigate?.('settings')}
+                            title="Account settings"
+                            className="w-9 h-9 rounded-full bg-white/10 hover:bg-white/20 border border-white/25 hover:border-white/50 flex items-center justify-center transition-all duration-200 overflow-hidden group"
+                        >
+                            <img
+                                src={userProfileIcon}
+                                alt="Profile"
+                                className="w-6 h-6 opacity-75 group-hover:opacity-100 transition-opacity"
+                            />
+                        </button>
                     ) : (
                         /* Logged-out state: Sign in button */
                         <button

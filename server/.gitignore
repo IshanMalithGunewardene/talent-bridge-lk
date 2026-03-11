@@ -1,0 +1,6 @@
+# Environment variables - never commit these!
+.env
+.env.*
+
+# Dependencies
+node_modules/
