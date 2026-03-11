@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import Navbar from './assets/components/Navbar.jsx';
 import Footer from './assets/components/Footer.jsx';
 import Hero from './features/home/Hero.jsx';
@@ -16,9 +16,10 @@ import RecruiterDashboard from './features/recruiter/RecruiterDashboard.jsx';
 function App() {
     const { session, loading, userRole } = useAuth();
     const [showAuth, setShowAuth] = useState(false);
-    const [page, setPage] = useState('home'); // 'home' | 'jobs' | 'search'
+    const [page, setPage] = useState('home');
     const [selectedRole, setSelectedRole] = useState('Frontend Developer');
     const [searchQuery, setSearchQuery] = useState('');
+    const didAutoRedirect = useRef(false);
 
     const navigateToJobs = (role) => {
         setSelectedRole(role);
@@ -37,9 +38,10 @@ function App() {
         if (session) setShowAuth(false);
     }, [session]);
 
-    // Auto-redirect recruiters to their dashboard after login
+    // Auto-redirect recruiters to their dashboard once after login
     useEffect(() => {
-        if (userRole === 'recruiter' && page === 'home') {
+        if (userRole === 'recruiter' && page === 'home' && !didAutoRedirect.current) {
+            didAutoRedirect.current = true;
             setPage('recruiter');
         }
     }, [userRole, page]);
