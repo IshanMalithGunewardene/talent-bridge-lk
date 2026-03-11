@@ -43,6 +43,7 @@ function AuthPage({ onClose }) {
                         },
                     }}
                     providers={['google', 'github']}
+                    redirectTo={`${window.location.origin}`}
                 />
             </div>
         </div>
